@@ -2,9 +2,9 @@
 
 This is a demo for developers to test and validate the current plugin functionality and to provide a fully working example of the functionality including w3c and ietf status lists. **Do not use for production deployments** 
 
-This demo is configured to serve public subdomains through Caddy. Public domain
-values are kept in `.env` so the Docker Compose file does not need to be edited
-per environment.
+This demo is configured to serve public subdomains through Nginx Proxy Manager.
+Public domain values are kept in `.env` so the Docker Compose file does not
+need to be edited per environment.
 
 ```
 cp .env.example .env
@@ -14,20 +14,25 @@ cp .env.example .env
 # DEMO_PUBLIC_URL=https://demo.your-domain.example
 # STATUS_LIST_PUBLIC_URI=https://issuer.your-domain.example/tenant/{tenant_id}/status/{list_number}
 # WEBVH_SERVER_URL=https://webvh.your-domain.example
-# CADDY_HTTP_PORT=80
-# CADDY_HTTPS_PORT=443
+# PROXY_MANAGER_HTTP_PORT=80
+# PROXY_MANAGER_HTTPS_PORT=443
+# PROXY_MANAGER_ADMIN_PORT=81
 docker compose up
 ```
 
-Point DNS for these hostnames to this machine/server. Caddy listens on
-`CADDY_HTTP_PORT` and `CADDY_HTTPS_PORT`, obtains TLS certificates, and routes
-traffic inside the Docker network:
+Point DNS for these hostnames to this machine/server. Nginx Proxy Manager
+listens on `PROXY_MANAGER_HTTP_PORT`, `PROXY_MANAGER_HTTPS_PORT`, and
+`PROXY_MANAGER_ADMIN_PORT`.
+
+Open the Proxy Manager UI at `http://localhost:81`. The default login is
+`admin@example.com` / `changeme`; change it immediately, then create these
+Proxy Hosts with SSL enabled:
 
 | Public hostname | Local service |
 | --- | --- |
-| `OID4VCI_PUBLIC_URL` | `issuer:8082` |
-| `AUTH_SERVER_PUBLIC_URL` | `auth-server:9001` |
-| `DEMO_PUBLIC_URL` | `demo-app:3000` |
+| `issuer.your-domain.example` | `http://issuer:8082` |
+| `auth.your-domain.example` | `http://auth-server:9001` |
+| `demo.your-domain.example` | `http://demo-app:3000` |
 
 `STATUS_LIST_PUBLIC_URI` must use the same public issuer hostname as
 `OID4VCI_PUBLIC_URL`, with `/tenant/{tenant_id}/status/{list_number}` appended.
