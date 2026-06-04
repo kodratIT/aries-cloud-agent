@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "did-web"
+version = "0.1.0"
+description = "ACA-Py plugin for creating local did:web records and publishable DID documents."
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.13"
+acapy-agent = { version = "~1.6.0", optional = true }
+
+[tool.poetry.extras]
+aca-py = ["acapy-agent"]
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.15.14"
+pytest = "^9.0.3"
+pytest-asyncio = "^1.2.0"
+
+[build-system]
+requires = ["setuptools", "poetry-core>=2.1"]
+build-backend = "poetry.core.masonry.api"

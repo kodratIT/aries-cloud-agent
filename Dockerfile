@@ -27,6 +27,7 @@ RUN pip install --no-deps \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=cheqd \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=connection_update \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=connections \
+    git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=did_web \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=firebase_push_notifications \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=hedera \
     git+https://github.com/${REPO_OWNER}/acapy-plugins@${ACA_PY_VERSION}#subdirectory=multitenant_provider \

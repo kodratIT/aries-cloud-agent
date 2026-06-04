@@ -13,6 +13,8 @@ LOGGER = logging.getLogger(__name__)
 
 async def setup(context: InjectionContext):
     """Setup the plugin."""
+    did_methods = context.inject(DIDMethods)
+
     did_resolver_registry = context.inject_or(DIDResolver)
     if not did_resolver_registry:
         LOGGER.warning("No DID Resolver instance found in context")
@@ -31,5 +33,4 @@ async def setup(context: InjectionContext):
     await hedera_anoncreds_registry.setup(context)
     anoncreds_registry.register(hedera_anoncreds_registry)
 
-    did_methods = context.inject(DIDMethods)
     did_methods.register(HEDERA)

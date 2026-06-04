@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 TUNNEL_ENDPOINT=${TUNNEL_ENDPOINT:-http://ngrok:4040}
 
@@ -22,12 +23,17 @@ liveliness_check () {
         done
 }
 
-liveliness_check "${TUNNEL_ENDPOINT}"
+if [ -n "$OID4VCI_PUBLIC_URL" ]; then
+        export OID4VCI_ENDPOINT="${OID4VCI_PUBLIC_URL%/}"
+else
+        liveliness_check "${TUNNEL_ENDPOINT}"
 
-export OID4VCI_ENDPOINT=$(curl --silent "${TUNNEL_ENDPOINT}/api/tunnels" | jq -r '.tunnels[] | select(.name == "issuer") | .public_url')
+        export OID4VCI_ENDPOINT=$(curl --silent "${TUNNEL_ENDPOINT}/api/tunnels" | jq -r '.tunnels[] | select(.name == "issuer") | .public_url')
+fi
 
-export STATUS_LIST_PUBLIC_URI=${OID4VCI_ENDPOINT}/tenant/{tenant_id}/status/{list_number}
+export STATUS_LIST_PUBLIC_URI=${STATUS_LIST_PUBLIC_URI:-${OID4VCI_ENDPOINT}/tenant/{tenant_id}/status/{list_number}}
 
+echo "OID4VCI_ENDPOINT: $OID4VCI_ENDPOINT"
 echo "STATUS_LIST_PUBLIC_URI: $STATUS_LIST_PUBLIC_URI"
 
 exec "$@"

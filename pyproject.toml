@@ -21,6 +21,7 @@ plugins = [
     "acapy-plugin-cheqd @ file:///cheqd",
     "acapy-plugin-connection-update @ file:///connection_update",
     "acapy-plugin-connections @ file:///connections",
+    "did-web @ file:///did_web",
     "acapy-plugin-firebase-push-notifications @ file:///firebase_push_notifications",
     "acapy-plugin-hedera @ file:///hedera",
     "acapy-plugin-multitenant-provider @ file:///multitenant_provider",

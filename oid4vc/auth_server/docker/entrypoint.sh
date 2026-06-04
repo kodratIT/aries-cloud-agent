@@ -34,7 +34,8 @@ export ALEMBIC_DB_SCHEMA="admin"
 unset ALEMBIC_DB_URL
 unset ALEMBIC_DB_SCHEMA
 
-# Need the authserver endpoint
+# Need the authserver endpoint. Prefer an explicit public URL for local
+# Cloudflare Tunnel/Zero Trust setups; keep ngrok discovery as a fallback.
 TUNNEL_ENDPOINT=${TUNNEL_ENDPOINT:-http://ngrok:4040}
 
 WAIT_INTERVAL=${WAIT_INTERVAL:-3}
@@ -58,10 +59,17 @@ liveliness_check () {
         done
 }
 
-liveliness_check "${TUNNEL_ENDPOINT}"
+if [ -n "$AUTH_SERVER_PUBLIC_URL" ]; then
+        export TENANT_ISSUER_BASE_URL="${AUTH_SERVER_PUBLIC_URL%/}"
+elif [ -n "$TENANT_ISSUER_BASE_URL" ]; then
+        export TENANT_ISSUER_BASE_URL="${TENANT_ISSUER_BASE_URL%/}"
+else
+        liveliness_check "${TUNNEL_ENDPOINT}"
 
-# Get the authserver tunnel public URL using jq
-export TENANT_ISSUER_BASE_URL=$(curl --silent "${TUNNEL_ENDPOINT}/api/tunnels" | jq -r '.tunnels[] | select(.name == "authserver") | .public_url')
+        # Get the authserver tunnel public URL using jq
+        export TENANT_ISSUER_BASE_URL=$(curl --silent "${TUNNEL_ENDPOINT}/api/tunnels" | jq -r '.tunnels[] | select(.name == "authserver") | .public_url')
+fi
+
 echo "TENANT_ISSUER_BASE_URL: $TENANT_ISSUER_BASE_URL"
 
 # Run Alembic migrations
