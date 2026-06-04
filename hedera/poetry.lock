@@ -2767,14 +2767,14 @@ testing = ["fields", "hunter", "process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
 name = "pytest-ruff"
-version = "0.4.1"
+version = "0.5"
 description = "pytest plugin to check ruff requirements."
 optional = false
 python-versions = "<4.0,>=3.8"
 groups = ["dev"]
 files = [
-    {file = "pytest_ruff-0.4.1-py3-none-any.whl", hash = "sha256:69acd5b2ba68d65998c730b5b4d656788193190e45f61a53aa66ef8b390634a4"},
-    {file = "pytest_ruff-0.4.1.tar.gz", hash = "sha256:2c9a30f15f384c229c881b52ec86cfaf1e79d39530dd7dd5f2d6aebe278f7eb7"},
+    {file = "pytest_ruff-0.5-py3-none-any.whl", hash = "sha256:d9db170d86fb167008e6702b4d79e2cccd8287f069c3a57f9261831cebdc4a31"},
+    {file = "pytest_ruff-0.5.tar.gz", hash = "sha256:f611c780fc2b9b8d7041fa0e7589f0a9f352b288d0cfc330881101b35d382063"},
 ]
 
 [package.dependencies]
@@ -3576,4 +3576,4 @@ aca-py = ["acapy-agent"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "06450848b1282ffd0051a379d13bc111d68f7ce33ca6a18ec467fa13c5eed7ca"
+content-hash = "c3c5e62c979ef9d5f173ccd44e833b440e2743d98cf0fe05d6e6a75b000c38f5"
