@@ -197,3 +197,5 @@ settings.json
 /docs
 mkdocs.yml
 *.code-workspace
+
+.sisyphus
