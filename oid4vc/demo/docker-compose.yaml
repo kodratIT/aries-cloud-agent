@@ -52,6 +52,10 @@ services:
         --plugin sd_jwt_vc
         --plugin mso_mdoc
         --plugin status_list.v1_0
+        --plugin-config-value status_list.public_uri=${STATUS_LIST_PUBLIC_URI}
+        --plugin-config-value status_list.file_path=/tmp/bitstring/{tenant_id}/{list_number}
+        --plugin-config-value status_list.list_size=131072
+        --plugin-config-value status_list.shard_size=131072
         --plugin hedera
         --multitenant
         --multitenant-admin
