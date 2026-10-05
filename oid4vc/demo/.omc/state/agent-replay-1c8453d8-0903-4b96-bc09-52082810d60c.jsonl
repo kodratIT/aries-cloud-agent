@@ -1,0 +1,4 @@
+{"t":0,"agent":"system","event":"skill_invoked","skill_name":"brainstorming"}
+{"t":0,"agent":"aebc4b9","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"aebc4b9","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":136380}
+{"t":0,"agent":"a2bcf21","agent_type":"unknown","event":"agent_stop","success":true}
