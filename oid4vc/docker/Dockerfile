@@ -34,7 +34,7 @@ RUN poetry run pip install ./hedera-plugin
 RUN apt-get update && apt-get install -y git build-essential ca-certificates curl && apt-get clean
 RUN git clone https://github.com/Indicio-tech/isomdl-uniffi.git
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN curl https://mise.run | sh && /root/.local/bin/mise install zig@0.16 && /root/.local/bin/mise reshim
+RUN curl https://mise.run | sh && /root/.local/bin/mise install zig@0.16.0 && /root/.local/bin/mise use -g zig@0.16.0 && /root/.local/bin/mise reshim
 ENV PATH="/root/.local/share/mise/shims:/root/.local/bin:/root/.cargo/bin:${PATH}"
 WORKDIR /usr/src/app/isomdl-uniffi/python
 RUN python build.py
